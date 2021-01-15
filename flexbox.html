@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+	<title>Flexbox</title>
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons" rel="stylesheet">
+	<link href="https://cdn.jsdelivr.net/npm/vuetify@1.x/dist/vuetify.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="./flexbox.css">
+
+	<script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/vuetify@1.5.24/dist/vuetify.js"></script>
+</head>
+<body>
+
+
+<div id="app">
+	<v-app class="light-darken-2">
+		<v-container fluid grid-list-lg>
+			<v-layout row wrap align-stretch justify-center id="controls">
+				<v-flex class="control-card">
+					<v-card class="fill-height">
+						<v-card-text>
+							<div class="control-properties">
+								<span class="title">#wrapper {</span>
+								<div v-for="(options, property) in body.properties" class="css-property">
+									<span>{{ property }}:</span>
+									<v-combobox
+										v-model="body.styles[property]"
+										:items="options"
+										v-bind="inputAttrs"
+									></v-combobox>
+									<span>;</span>
+								</div>
+								<span class="title">}</span>
+							</div>
+							<p class="title mt-4 mb-2">Languages</p>
+							<v-btn-toggle v-model="currentLanguageId" class="" mandatory>
+								<v-btn flat v-for="(language, index) in languages" :key="languages[index].name">
+									{{ languages[index].name }}
+								</v-btn>
+							</v-btn-toggle>
+						</v-card-text>
+					</v-card>
+				</v-flex>
+				<v-flex class="control-card" id="container-controls">
+					<v-card dark color="light-blue" class="primary-bg fill-height">
+						<v-card-text>
+							<span class="title">.flex-container {</span>
+								<div v-for="(options, property) in container.properties" class="css-property">
+									<span>{{ property }}:</span>
+									<v-combobox
+										v-model="container.styles[property]"
+										:items="options"
+										v-bind="inputAttrs"
+									></v-combobox>
+									<span>;</span>
+								</div>
+							<span class="title">}</span>
+							<div class="other-property">
+								<span>Container height</span>
+								<v-slider
+									:value="container.styles.height"
+									@change="container.styles.height = $event + 'px'"
+									color="white"
+									always-dirty
+									min="360"
+									max="800"
+								></v-slider>
+							</div>
+						</v-card-text>
+					</v-card>
+				</v-flex>
+				<v-flex class="control-card" id="item-controls">
+					<v-card dark color="fill-height blue darken-4">
+						<v-card-text>
+							<span class="title">.flex-item {</span>
+							<flex-selector v-model="items.styles.flex" :input-attrs="inputAttrs"></flex-selector>
+							<span class="title">}</span>
+							<div id="item-count" class="other-property">
+								<span>Number of items</span>
+								<v-text-field
+									:value="items.itemCount"
+									@input="items.itemCount = parseInt($event)"
+									type="number"
+									label=""
+									:min="items.min"
+									:max="items.max"
+									v-bind="inputAttrs"
+									class="mt-2"
+								></v-text-field>
+							</div>
+							<div class="other-property" v-if="currentLanguage === 'English'">
+								<span>Enable individual styling</span>
+								<v-switch
+									v-model="items.isIndividualEditingEnabled"
+									color="white"
+								></v-switch>
+							</div>
+						</v-card-text>
+					</v-card>
+				</v-flex>
+			</v-layout>
+	
+			<v-layout :style="{textOrientation: currentLanguage === 'Mongolian' ? 'upright' : 'inherit'}">
+				<v-flex xs12>
+					<div id="wrapper" :style="body.styles" >
+						<div class="flex-container light-blue" :style="container.styles">
+							<flex-item 
+								v-for="itemNumber in items.itemCount" 
+								:flex-all-items="items.styles.flex" 
+								:content="numbers ? numbers[itemNumber - 1] : itemNumber" 
+								:item-number="itemNumber" 
+								:language="currentLanguage"
+								:position-options="container.properties['align-items']"
+								:is-individual-editing-enabled="items.isIndividualEditingEnabled"
+								:input-attrs="inputAttrs" 
+								:key="`item${itemNumber}.${container.key}`" 
+								ref="flexItems"
+							>
+							</flex-item>
+						</div>
+					</div>
+				</v-flex>
+			</v-layout>
+		</v-container>
+	</v-app>
+</div>
+
+
+<script src="flexbox.js"></script>
+
+</body>
+</html>
+
+
+

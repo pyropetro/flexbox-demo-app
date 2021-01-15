@@ -1,0 +1,249 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+#app {
+	overflow: overlay;
+}
+
+body {
+	font-family: 'Roboto', sans-serif;
+}
+
+#wrapper {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	padding: 2em 3em;
+	width: 100%;
+}
+
+/*#cross-axis {
+	writing-mode: vertical-lr;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	flex-direction: row;
+	flex: 0 1 auto;
+}
+#main-axis {
+	display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+  width: calc(100% - 2em);
+}*/
+
+/* #controls {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	width: 100%;
+}
+
+.control-group {
+	flex: 1 0 50%;
+} */
+
+.accent-text {
+	color: #00AEEF;
+	font-weight: 700;
+}
+
+.accent-bg {
+	background-color: #00AEEF;
+	color: #fff;
+}
+
+.primary-text {
+	color: #19325D;
+}
+
+.primary-bg {
+	background-color: #19325D;
+	color: #fff;
+}
+
+.control-card {
+	flex: 0 1 410px;
+}
+
+.css-property, .other-property {
+	display: flex;
+	flex-direction: row;
+	align-items: baseline;
+	justify-content: flex-end;
+	margin-top: 0.5em;
+}
+.css-property#item-count {
+	align-items: normal;
+}
+.css-property > * {
+	flex: 0 1 auto;
+}
+.css-property > span:first-child {
+	flex: 1 0 75px;
+  text-align: right;
+}
+.css-property > :not(:first-child) {
+	padding-left: .5em;
+}
+.css-property > :nth-child(2) {
+	flex: 1 0 234px;
+}
+.other-property > span:first-child {
+	/* flex: 1 0 200px; */
+  text-align: right;
+}
+.other-property > :not(:first-child) {
+	padding-left: 1em;
+}
+.other-property > :nth-child(2) {
+	flex: 0 1 200px;
+}
+
+
+.flex-properties {
+	display: flex;
+	flex-direction: row;
+	align-items: baseline;
+	justify-content: flex-end;
+}
+.flex-properties > :not(:first-child) {
+	padding-left: .5em;
+}
+.flex-properties > :first-child,
+.flex-properties > :nth-child(2) {
+	flex: 1 0 25%;
+}
+
+.v-text-field input {
+	padding: 4px 0;
+}
+
+.flex-container {
+	padding: 2em;
+	border-radius: 2em;
+	width: 100%;
+	max-width: 1200px;
+	margin: 0 auto;
+  box-sizing: content-box;
+}
+
+.flex-item {
+	position: relative;
+	background-color: #0d47a1;
+	color: #fff;
+	padding: 0.5em 0;
+	border: 5px solid #fff !important;
+	border-radius: .25em;
+	font-size: 3em;
+	text-align: center;
+  box-sizing: border-box;
+}
+
+.item-controls {
+	writing-mode: horizontal-tb;
+	direction: ltr;
+	position: absolute;
+	z-index: 100;
+	width: 400px;
+	bottom: calc(100% - 0.75em);
+	margin-left: 50%;
+	transform: translateX(-50%) scale(0);
+	transition: transform .25s;
+	background-color: #fff;
+	color: #0d47a1;
+	text-align: left;
+	border-style: solid;
+	border-width: 5px 5px 0 5px;
+	border-color: #0d47a1;
+	border-radius: 1em;
+	padding: 2em;
+	box-shadow: 0 2px 7px 4px rgba(0,0,0,0.2);
+	font-size: 1rem;
+	transform-origin: 50% calc(100% + 20px);
+}
+.item-controls::after {
+	content: '';
+	background-color: transparent;
+	position: absolute;
+	top: 99%;
+	left: 50%;
+	width: 0;
+	height: 0px;
+	transform: translateX(-50%);
+	border-color: #fff transparent transparent;
+	border-width: 20px;
+	border-style: solid;
+}
+
+.flex-item:hover .item-controls {
+	transform: translateX(-50%) scale(1);
+}
+.flex-item.leftmost .item-controls {
+	margin-left: 15px;
+	border-width: 5px 5px 0 0;
+	border-radius: 14px 14px 14px 0;
+}
+.flex-item.leftmost .item-controls::after {
+	left: 15px;
+	border-color: #fff transparent transparent #fff;
+	border-width: 15px;
+}
+.flex-item.leftmost:hover .item-controls {
+	transform: translateX(0%) scale(1);
+}
+.flex-item.rightmost .item-controls {
+	margin-left: calc(100% - 15px);
+	border-width: 5px 0 0 5px;
+	border-radius: 14px 14px 0 14px;
+}
+.flex-item.rightmost:hover .item-controls {
+	transform: translateX(-100%) scale(1);
+}
+.flex-item.rightmost .item-controls::after {
+	left: calc(100% - 15px);
+	border-color: #fff #fff transparent transparent;
+	border-width: 15px;
+}
+
+.item-number {
+	writing-mode: horizontal-tb;
+	direction: ltr;
+	position: absolute;
+	bottom: 10px;
+	right: 15px;
+	font-size: 1rem;
+}
+
+.v-input input::placeholder {
+	font-size: 11px;
+	max-width: 30px;
+	overflow: visible;
+}
+
+.v-text-field.v-text-field--enclosed>.v-input__control>.v-input__slot {
+	padding: 0 0 0 12px;
+}
+
+.v-text-field--box>.v-input__control>.v-input__slot, .v-text-field--full-width>.v-input__control>.v-input__slot, .v-text-field--outline>.v-input__control>.v-input__slot {
+	min-height: 0;
+}
+
+.v-autocomplete.v-text-field--enclosed:not(.v-text-field--solo):not(.v-text-field--single-line) .v-select__slot>input {
+	margin-top: 0;
+}
+
+.v-text-field--box input, .v-text-field--full-width input, .v-text-field--outline input {
+	margin-top: 0px;
+}
+
+.v-text-field.v-text-field--enclosed .v-input__append-inner, .v-text-field.v-text-field--enclosed .v-input__append-outer, .v-text-field.v-text-field--enclosed .v-input__prepend-inner, .v-text-field.v-text-field--enclosed .v-input__prepend-outer {
+	margin-top: 3px;
+}
+
+.v-select.v-text-field--enclosed:not(.v-text-field--single-line) .v-select__selections {
+	padding-top: 0;
+}
